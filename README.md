@@ -56,5 +56,6 @@
 |phone_number|integer| null: false |
 |purchase|references||
 
+
 ### Association
 - belongs_to : purchase
