@@ -1,24 +1,60 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| email   | string | null: false |
+| password|string| null: false |
+|nickname|string| null: false |
+|family_name|string| null: false |
+|first_name|string|null: false|
+|furigana_family_name|string|null: false|
+|furigana_first_name|string|null: false|
+|birthdate|date|null: false|
 
-Things you may want to cover:
+### Association
+- has_many : items
+- has_many : purchase
 
-* Ruby version
 
-* System dependencies
+## itemsテーブル
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+|name|string| null: false |
+|category|string| null: false |
+|delivery_charge|integer| null: false |
+|delivery_source|string| null: false |
+|days|integer| null: false |
+|price|integer| null: false |
+|condition|string| null: false |
+|user|references||
 
-* Configuration
+### Association
+- has_one : purchase
+- belongs_to : users
 
-* Database creation
+## purchaseテーブル
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+|item|references||
+|user|references||
 
-* Database initialization
 
-* How to run the test suite
+### Association
+- belongs_to : users
+- belongs_to : items
+- has_one    : delivery_address
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## delivery_addressテーブル
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+|postal_code|integer| null: false |
+|prefecture|string| null: false |
+|city|string| null: false |
+|block|integer| null: false |
+|phone_number|integer| null: false |
+|purchase|references||
 
-* ...
+### Association
+- belongs_to : purchase
