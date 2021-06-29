@@ -21,12 +21,12 @@
 | ------ | ---------- | ------------------------------ |
 |name|string| null: false |
 |description|text| null: false |
-|category|integer| null: false |
-|delivery_charge|integer| null: false |
-|delivery_source|integer| null: false |
-|days|integer| null: false |
+|category_id|integer| null: false |
+|delivery_charge_id|integer| null: false |
+|delivery_source_id|integer| null: false |
+|day_id|integer| null: false |
 |price|integer| null: false |
-|condition|integer| null: false |
+|condition_id|integer| null: false |
 |user|references| foreign_key: true |
 
 ### Association
@@ -50,7 +50,7 @@
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
 |postal_code|string| null: false |
-|prefecture|integer| null: false |
+|delivery_source_id|integer| null: false |
 |city|string| null: false |
 |block|string| null: false |
 |building_name|string|  |
