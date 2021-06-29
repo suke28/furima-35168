@@ -24,16 +24,16 @@
 |category_id|integer| null: false |
 |delivery_charge_id|integer| null: false |
 |delivery_source_id|integer| null: false |
-|day_id|integer| null: false |
+|day_to_ship_id|integer| null: false |
 |price|integer| null: false |
 |condition_id|integer| null: false |
 |user|references| foreign_key: true |
 
 ### Association
 - has_one : purchase
-- belongs_to : users
+- belongs_to : user
 
-## purchaseテーブル
+## purchasesテーブル
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
 |item|references| foreign_key: true |
@@ -41,8 +41,8 @@
 
 
 ### Association
-- belongs_to : users
-- belongs_to : items
+- belongs_to : user
+- belongs_to : item
 - has_one    : delivery_address
 
 
