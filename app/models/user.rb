@@ -22,4 +22,5 @@ class User < ApplicationRecord
     validates :furigana_family_name
     validates :furigana_first_name
   end
+  has_many :items
 end
