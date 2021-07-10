@@ -47,20 +47,19 @@ RSpec.describe User, type: :model do
         @user.password = 'aaaaaa'
         @user.password_confirmation = 'aaaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
+        expect(@user.errors.full_messages).to include('Password Password Include both letters and numbers')
       end
       it 'passwordは半角数字のみでは登録できないこと' do
         @user.password = '111111'
         @user.password_confirmation = '111111'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
+        expect(@user.errors.full_messages).to include('Password Password Include both letters and numbers')
       end
       it 'passwordは全角英数字混合では登録できないこと' do
         @user.password = 'ａａａ１１１'
         @user.password_confirmation = 'ａａａ１１１'
         @user.valid?
-        binding.pry
-        expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
+        expect(@user.errors.full_messages).to include('Password Password Include both letters and numbers')
       end
       it '重複したemailが存在する場合登録できない' do
         @user.save
@@ -93,7 +92,8 @@ RSpec.describe User, type: :model do
       it 'furigana_first_nameが必須であること' do
         @user.furigana_first_name = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Furigana first name can't be blank", 'Furigana first name is invalid. Input full-width katakana characters.')
+        expect(@user.errors.full_messages).to include("Furigana first name can't be blank",
+                                                      'Furigana first name is invalid. Input full-width katakana characters.')
       end
       it 'family_nameは全角入力が必須であること' do
         @user.family_name = 'ﾔﾏﾀﾞ'
@@ -120,7 +120,6 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Birthdate can't be blank")
       end
-
     end
   end
 end
