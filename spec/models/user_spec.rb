@@ -17,9 +17,9 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Email can't be blank")
     end
     it 'emailは@を含む必要があること' do
-      @user.email = "hoge.hoge"
+      @user.email = 'hoge.hoge'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Email is invalid")
+      expect(@user.errors.full_messages).to include('Email is invalid')
     end
     it 'passwordが空では登録できない' do
       @user.password = ''
@@ -50,7 +50,7 @@ RSpec.describe User, type: :model do
       @user.password_confirmation = '1234567'
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
-     end
+    end
     it 'family_nameが必須であること' do
       @user.family_name = ''
       @user.valid?
@@ -69,27 +69,28 @@ RSpec.describe User, type: :model do
     it 'furigana_first_nameが必須であること' do
       @user.furigana_first_name = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include("Furigana first name can't be blank", "Furigana first name is invalid. Input full-width katakana characters.")
+      expect(@user.errors.full_messages).to include("Furigana first name can't be blank",
+                                                    'Furigana first name is invalid. Input full-width katakana characters.')
     end
     it 'family_nameは全角入力が必須であること' do
       @user.family_name = 'ﾔﾏﾀﾞ'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Family name is invalid. Input full-width characters.")
+      expect(@user.errors.full_messages).to include('Family name is invalid. Input full-width characters.')
     end
     it 'first_nameは全角入力が必須であること' do
       @user.first_name = 'ﾀﾛｳ'
       @user.valid?
-      expect(@user.errors.full_messages).to include("First name is invalid. Input full-width characters.")
+      expect(@user.errors.full_messages).to include('First name is invalid. Input full-width characters.')
     end
     it 'furigana_family_nameは全角カタカナ入力が必須であること' do
       @user.furigana_family_name = 'ﾔﾏﾀ'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Furigana family name is invalid. Input full-width katakana characters.")
+      expect(@user.errors.full_messages).to include('Furigana family name is invalid. Input full-width katakana characters.')
     end
     it 'furigana_first_nameは全角カタカナ入力が必須であること' do
       @user.furigana_first_name = 'ﾀﾛｳ'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Furigana first name is invalid. Input full-width katakana characters.")
+      expect(@user.errors.full_messages).to include('Furigana first name is invalid. Input full-width katakana characters.')
     end
     it 'birthdateが必須であること' do
       @user.birthdate = ''
