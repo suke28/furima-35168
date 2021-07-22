@@ -17,7 +17,7 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.all.order("created_at DESC")
+    @items = Item.order("created_at DESC")
   end
   private
   def items_params
