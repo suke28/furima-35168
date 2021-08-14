@@ -23,4 +23,5 @@ class User < ApplicationRecord
     validates :furigana_first_name
   end
   has_many :items
+  has_many :purchases
 end

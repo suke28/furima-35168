@@ -2,6 +2,7 @@ class Item < ApplicationRecord
   belongs_to :user
 
   has_one_attached :image
+  has_one :purchase
 
   validates :image, :name, :description, presence: true
 
@@ -15,4 +16,6 @@ class Item < ApplicationRecord
   validates :category_id, :condition_id, :day_to_ship_id, :delivery_charge_id, :delivery_source_id,
             numericality: { other_than: 1, message: "can't be blank" }
   validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+
+
 end
