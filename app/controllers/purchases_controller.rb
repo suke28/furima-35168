@@ -4,6 +4,12 @@ class PurchasesController < ApplicationController
   def index
     @purchase_delivery_address = PurchaseDeliveryAddress.new
     @item = Item.find(params[:item_id])
+    if current_user.id == @item.user_id
+      redirect_to root_path 
+    end
+    if @item.purchase.present?
+      redirect_to root_path
+    end
   end
 
   def create
@@ -30,7 +36,7 @@ class PurchasesController < ApplicationController
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']  # 自身のPAY.JPテスト秘密鍵を記述しましょう
     Payjp::Charge.create(
       amount: @item.price, # 商品の値段
-      card: order_params[:token], # カードトークン
+      card: purchase_params[:token], # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
   end
