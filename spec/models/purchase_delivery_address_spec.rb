@@ -17,7 +17,6 @@ RSpec.describe PurchaseDeliveryAddress, type: :model do
     end
   end
 
-
   context '内容に問題がある場合' do
     it 'postal_codeが空だと保存できないこと' do
       @purchase_delivery_address.postal_code = ''
@@ -49,7 +48,7 @@ RSpec.describe PurchaseDeliveryAddress, type: :model do
       @purchase_delivery_address.valid?
       expect(@purchase_delivery_address.errors.full_messages).to include("Phone number can't be blank")
     end
-    it "tokenが空では登録できないこと" do
+    it 'tokenが空では登録できないこと' do
       @purchase_delivery_address.token = nil
       @purchase_delivery_address.valid?
       expect(@purchase_delivery_address.errors.full_messages).to include("Token can't be blank")
