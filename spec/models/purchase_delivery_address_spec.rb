@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe PurchaseDeliveryAddress, type: :model do
   before do
-    @user = FactoryBot.build(:user)
-    @item = FactoryBot.build(:item)
-    @purchase_delivery_address = FactoryBot.build(:purchase_delivery_address)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item)
+    @purchase_delivery_address = FactoryBot.build(:purchase_delivery_address, user_id: user.id, item_id: item.id)
+    sleep(0.1)
   end
 
   context '内容に問題ない場合' do
@@ -52,6 +53,26 @@ RSpec.describe PurchaseDeliveryAddress, type: :model do
       @purchase_delivery_address.token = nil
       @purchase_delivery_address.valid?
       expect(@purchase_delivery_address.errors.full_messages).to include("Token can't be blank")
+    end
+    it '電話番号にはハイフンが不要であること' do
+      @purchase_delivery_address.phone_number = '000-000-0000'
+      @purchase_delivery_address.valid?
+      expect(@purchase_delivery_address.errors.full_messages).to include("Phone number Phone number is invalid. Input only number")
+    end
+    it '電話番号が12桁以上では登録できないこと' do
+      @purchase_delivery_address.phone_number = '0000000000000'
+      @purchase_delivery_address.valid?
+      expect(@purchase_delivery_address.errors.full_messages).to include("Phone number Phone number is too short")
+    end
+    it 'user_idが空では登録できないこと' do
+      @purchase_delivery_address.user_id = ''
+      @purchase_delivery_address.valid?
+      expect(@purchase_delivery_address.errors.full_messages).to include("User can't be blank")
+    end
+    it 'item_idが空では登録できないこと' do
+      @purchase_delivery_address.item_id = ''
+      @purchase_delivery_address.valid?
+      expect(@purchase_delivery_address.errors.full_messages).to include("Item can't be blank")
     end
   end
 end
