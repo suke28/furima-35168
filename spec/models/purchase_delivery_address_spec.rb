@@ -74,5 +74,20 @@ RSpec.describe PurchaseDeliveryAddress, type: :model do
       @purchase_delivery_address.valid?
       expect(@purchase_delivery_address.errors.full_messages).to include("Item can't be blank")
     end
+    it '電話番号が全角文字では登録できないこと' do
+      @purchase_delivery_address.phone_number = '０００００００００００'
+      @purchase_delivery_address.valid?
+      expect(@purchase_delivery_address.errors.full_messages).to include("Phone number Phone number is invalid. Input only number")
+    end
+    it '電話番号が半角英数混合では登録できないこと' do
+      @purchase_delivery_address.phone_number = 'aaaaaaa0000'
+      @purchase_delivery_address.valid?
+      expect(@purchase_delivery_address.errors.full_messages).to include("Phone number Phone number is invalid. Input only number")
+    end
+    it '電話番号が半角英語だけでは登録できないこと' do
+      @purchase_delivery_address.phone_number = 'aaaaaaaaaaa'
+      @purchase_delivery_address.valid?
+      expect(@purchase_delivery_address.errors.full_messages).to include("Phone number Phone number is invalid. Input only number")
+    end
   end
 end
