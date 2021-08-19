@@ -6,9 +6,9 @@ class PurchaseDeliveryAddress
     validates :user_id, :city, :block, :phone_number, :token, :item_id
     validates :postal_code,
               format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'Postal code is invalid. Enter it as follows (e.g. 123-4567)' }
-    validates :phone_number, format: { with: /\A\d{11}\z/, message: 'Phone number is too short' }
-    validates :phone_number, format: { with: /\A[0-9]+\z/, message: 'Phone number is invalid. Input only number' }
   end
+  validates :phone_number, format: { with: /\A\d{11}\z/, message: 'Phone number is too short' }
+  validates :phone_number, format: { with: /\A[0-9]+\z/, message: 'Phone number is invalid. Input only number' }
   validates :delivery_source_id, numericality: { other_than: 0, message: "Delivery source can't be blank" }
   def save
     purchase = Purchase.create(item_id: item_id, user_id: user_id)
